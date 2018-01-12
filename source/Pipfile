@@ -1,0 +1,30 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[packages]
+
+django = "*"
+facebook-sdk = {git = "https://github.com/mobolic/facebook-sdk.git"}
+psycopg2 = "*"
+pillow = "*"
+django-extensions = "*"
+ipython = "*"
+sorl-thumbnail = "*"
+redis = "*"
+gunicorn = "*"
+
+
+[dev-packages]
+
+pytest-django = "*"
+factory-boy = "*"
+pytest-mock = "*"
+
+
+[requires]
+
+python_version = "3.6"

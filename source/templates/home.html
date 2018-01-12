@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}<title>{{ page.page_name }}</title>{% endblock %}
+
+{% block content %}
+    <main role="main">
+
+        <div class="jumbotron">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <img class="img-fluid" src="{{ page.profile_picture.url }}">
+                    </div>
+                    <div class="col-6">
+                        <h1>{{ page.page_name }}</h1>
+                        <p class="lead">{{ page.about }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cover-img">
+            <img class="img-fluid" src="{{ page.cover_picture.url }}">
+        </div>
+
+    </main><!-- /.container -->
+
+{% endblock %}

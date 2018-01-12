@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+{% block title %}<title>{{ name }} - Album</title>{% endblock %}
+
+{% block content %}
+    <main role="main">
+
+        <div class="album text-muted">
+            <div class="container">
+
+                <div class="row">
+                    {% for photo in photos %}
+                        <div class="card">
+                            <a href="{{ photo.image.url }}">
+                                <img class="img-fluid" src="
+                                        {% thumbnail photo.image "350x250" crop="center" as im %}{{ im.url }}"{% endthumbnail %}>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <div class="container">
+        <div class="row">
+            <div class="col pagination">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                        <a class="btn btn-primary" href="?page={{ page_obj.previous_page_number }}">previous</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                    </span>
+
+                    {% if page_obj.has_next %}
+                        <a class="btn btn-primary" href="?page={{ page_obj.next_page_number }}">next</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

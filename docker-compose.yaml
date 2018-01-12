@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+
+  db:
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5432:5432"
+
+  nginx:
+    image: nginx:latest
+    restart: always
+    volumes:
+      - ./volumes/static:/static
+      - ./volumes/media:/media
+      - ./config/nginx:/etc/nginx/conf.d
+    ports:
+      - "80:80"
+    depends_on:
+      - web
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
+  web:
+    build: .
+    env_file: config/fb.env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./volumes/media:/code/media
+      - ./volumes/static:/code/static_root
+      - ./source:/code
+    command: gunicorn spicy_face.wsgi -b 0.0.0.0:8000
